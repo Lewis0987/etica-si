@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+</head>
+<body>
+    <h1>Login Page</h1>
+    
+    <label for="username">Username:</label>
+    <input id="username" type="text" placeholder="Enter username"><br><br>
+
+    <label for="password">Password:</label>
+    <input id="password" type="password" placeholder="Enter password"><br><br>
+
+    <button id="loginBtn">登入 </button>  <button id="cancelBtn">取消 </button>
+
+    <p id="errorMessage" style="color: red;"></p> <!-- 用來顯示錯誤訊息 -->
+
+    <script>
+        document.getElementById("loginBtn").addEventListener("click", function() {
+            let username = document.getElementById("username").value.trim();
+            let password = document.getElementById("password").value.trim();
+            let errorMessage = document.getElementById("errorMessage");
+            errorMessage.textContent = "";  // 清空錯誤訊息
+
+            // 檢查 username 是否符合條件（6 個字元且只包含數字和英文字母）
+            const usernamePattern = /^[A-Za-z0-9]{6}$/;
+            // 檢查 password 是否符合條件（4 個數字）
+            const passwordPattern = /^\d{4}$/;
+
+            // 驗證條件：username = 6 碼，password = 4 碼
+            if (username === "") {
+                alert("帳號不可為空！"); ///跳出彈窗訊息
+                errorMessage.textContent = "帳號不可為空！";  ///#欄位提示訊息
+            }   else if (password === "") {
+                alert("密碼不可為空！"); ///跳出彈窗訊息
+                errorMessage.textContent = "密碼不可為空！";  ///#欄位提示訊息
+            }   else if (username.length === 6 && password.length === 4 && usernamePattern.test(username) && passwordPattern.test(password)) {
+                alert("登入成功！")
+                window.location.href = "home.html"; // 這裡改成你要跳轉的頁面
+            }    else {
+                errorMessage.textContent = "登入錯誤：請確認帳號為 6 碼且只包含字母與數字，密碼為 4 碼且只包含數字。";
+            }
+        });
+        document.getElementById("cancelBtn").addEventListener("click", function() {
+            document.getElementById("username").value = "";
+            document.getElementById("password").value = "";
+            document.getElementById("errorMessage").textContent = "";
+            alert("輸入已清除！") ;
+        });
+    </script>
+    
+</body>
+</html>
+
